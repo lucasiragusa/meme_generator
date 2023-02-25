@@ -1,3 +1,4 @@
+
 import os
 import random
 import sys
@@ -7,7 +8,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from MemeEngine.meme_engine import MemeEngine
 from QuoteEngine.QuoteModel import QuoteModel
 from QuoteEngine.Ingestor import Ingestor
-
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
@@ -45,12 +45,13 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="Generate a meme by combining a quote with an image.")
-
-    parser.add_argument('-p', '--path', type=str, help='Path to an image file')
-    parser.add_argument('-b', '--body', type=str, help='Quote body to add to the image')
-    parser.add_argument('-a', '--author', type=str, help='Quote author to add to the image')
-
+    parser = argparse.ArgumentParser(
+        description="Generate a meme by combining a quote with an image.")
+    parser.add_argument('-p', '--path', type=str,
+                        help='Path to an image file')
+    parser.add_argument('-b', '--body', type=str,
+                        help='Quote body to add to the image')
+    parser.add_argument('-a', '--author', type=str,
+                        help='Quote author to add to the image')
     args = parser.parse_args()
     print(generate_meme(args.path, args.body, args.author))
