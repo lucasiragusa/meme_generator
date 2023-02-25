@@ -7,6 +7,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from MemeEngine.meme_engine import MemeEngine
 from QuoteEngine.QuoteModel import QuoteModel
 from QuoteEngine.Ingestor import Ingestor
+from app import app
+app.app_context().push()
 
 
 def generate_meme(path=None, body=None, author=None):
