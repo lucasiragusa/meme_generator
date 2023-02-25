@@ -1,45 +1,66 @@
-# Meme Generator
-
+# Meme Generator Introduction
 The Meme Generator is a Python web application that generates memes by combining pictures with quotes. It contains a QuoteEngine module that generates quotes by reading them from various text files in different formats, and a MemeEngine module that generates images by resizing them.
 
 # Installation
-
 Clone the repository to your local machine using "git clone <repository-url>".
 Install the required dependencies by running "pip install -r requirements.txt".
 
-
-# Usage
-
+# Usage 1 - Flask app
 - Navigate to the "src" directory.
 - Run "python app.py" to start the local server.
-- Open a web browser and navigate to "http://localhost:5000/" to access the home page.
-- Click on the "Generate Meme" button to go to the meme generation form.
-- Select a meme image from the dropdown menu, enter the quote and author in the text fields, and click on the "Generate" button.
+- Open a web browser and navigate to the identified local host to access the home page.
+- Click on the "Random" button to go to generate a random meme. 
+- Click on the "Creator" button to use the meme generating page.  
 - The generated meme will be displayed on the next page.
 
-# Project Structure
+# Usage 2 - CLI
+- Navigate to the "src" directory.
+- Run the "meme.py" with three optional arguments (--body, --author, --path)  
+- --body: The body of the quote to use in the meme. If this argument is not provided, a random quote will be used.
+- --author: The author of the quote to use in the meme. If this argument is not provided, the author will be set to "Unknown".
+- --path: The path to the image file to use as the background of the meme. If this argument is not provided, a random image will be used.
 
+# Project Structure
 - The MemeEngine directory contains the meme_engine.py module which is responsible for generating memes by resizing images.
 - The QuoteEngine directory contains the quote_engine.py module which is responsible for generating quotes by reading them from various text files.
-- The src directory contains the app.py module which is responsible for running the local server and handling HTTP requests, the meme.py module which is responsible for the meme generation process, and the templates directory which contains the HTML templates for the user interface.
-- The tree.txt file is a listing of the project directory structure.
+- The src directory contains the app.py module which is responsible for running the local server and handling HTTP requests, the meme.py module which is a CLI interface, and the templates directory which contains the HTML templates for the user interface.
 
 # Project structure (tree)
 .
 ├── MemeEngine
-│   ├── __init__.py
-│   ├── __pycache__
-│   └── meme_engine.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   └── meme_engine.py
 ├── QuoteEngine
-│   ├── __init__.py
-│   └── quote_engine.py
+│   ├── CsvIngestor.py
+│   ├── DocxIngestor.py
+│   ├── Ingestor.py
+│   ├── IngestorInterface.py
+│   ├── PdfIngestor.py
+│   ├── QuoteModel.py
+│   ├── TxtIngestor.py
+│   ├── __init__.py
+│   └── __pycache__
+├── README.md
+├── __init__.py
+├── meme
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   └── pyvenv.cfg
+├── requirements.txt
 ├── src
-│   ├── __init__.py
-│   ├── _data
-│   ├── app.py
-│   ├── meme.py
-│   └── templates
-└── tree.txt
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── _data
+│   ├── _tmp
+│   ├── app.py
+│   ├── fonts
+│   ├── meme.py
+│   ├── static
+│   ├── templates
+│   └── tmp
+└── static
 
 # Dependencies
 
