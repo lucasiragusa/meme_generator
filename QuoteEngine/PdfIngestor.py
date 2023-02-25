@@ -32,18 +32,11 @@ class PdfIngestor(IngestorInterface):
             for line in lines:
                 if len(line) > 2:
                     parse = line.split(' - ')
-                    new_quote = QuoteModel(parse[0], parse[1].replace('\n', ''))
+                    new_quote = QuoteModel(parse[0],
+                                           parse[1].replace('\n', ''))
                     quotes.append(new_quote)
-        
+
         f.close()
         os.remove(tmp)
 
         return quotes
-
-        # lines = output.splitlines()
-        # for line in lines:
-        #     if len(line) > 0:
-        #         parse = line.split(' - ')
-        #         new_quote = QuoteModel(parse[0], parse[1].replace('\n', ''))
-        #         quotes.append(new_quote)
-        # return quotes

@@ -54,9 +54,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(generate_meme(args.path, args.body, args.author))
-
-
-    # @TODO Use ArgumentParser to parse the following CLI arguments
-    # path - path to an image file
-    # body - quote body to add to the image
-    # author - quote author to add to the image

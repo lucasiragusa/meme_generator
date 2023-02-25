@@ -1,24 +1,30 @@
+from MemeEngine.meme_engine import MemeEngine
+from QuoteEngine.Ingestor import Ingestor
+from flask import Flask, render_template, abort, request
 import random
 import os
 import tempfile
-from flask import Flask, render_template, abort, request
 import sys
 import requests
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from MemeEngine.meme_engine import MemeEngine
-from QuoteEngine.Ingestor import Ingestor
+
 
 app = Flask(__name__)
-
 meme = MemeEngine('./static')
 
+
 def setup():
-    """ Load all resources """
+    """
+    Initialize the Flask application and configure its routes and settings.
+
+    Returns:
+        Flask: A new Flask application instance.
+    """
 
     quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
                    './_data/DogQuotes/DogQuotesDOCX.docx',
                    './_data/DogQuotes/DogQuotesPDF.pdf',
-                   './_data/DogQuotes/DogQuotesCSV.csv', 
+                   './_data/DogQuotes/DogQuotesCSV.csv',
                    ]
 
     # Use the Ingestor class to parse all files in the quote_files variable
@@ -31,7 +37,8 @@ def setup():
 
     images_path = "./_data/photos/dog/"
 
-    # Use the pythons standard library os class to find all images within the images images_path directory
+    # Use the pythons standard library os class to find all images within the
+    # images images_path directory
     imgs = []
     for root, dirs, files in os.walk(images_path):
         for file in files:
@@ -41,12 +48,18 @@ def setup():
     print(f"Found {len(imgs)} image files in {images_path}")
     return quotes, imgs
 
+
 quotes, imgs = setup()
 
 
 @app.route('/')
 def meme_rand():
-    """ Generate a random meme """
+    """
+    Generate a random meme and display it on the web page.
+
+    Returns:
+        str: The HTML content to display on the web page.
+    """
 
     # Select a random image and quote
     img = random.choice(imgs)
@@ -58,22 +71,43 @@ def meme_rand():
 
 @app.route('/create', methods=['GET'])
 def meme_form():
-    """ User input for meme information """
+    """
+    Display a web form where the user can input the quote and
+    image for the meme.
+
+    Returns:
+        str: The HTML content to display on the web page.
+    """
     return render_template('meme_form.html')
 
 
 @app.route('/create', methods=['POST'])
 def meme_post():
-    """ Create a user defined meme """
+    """
+    Generate a meme using the data from the web form and
+    display it on the web page.
 
-    # 1. Use requests to save the image from the image_url form param to a temp local file.
+    The web form should have two input fields, one for the body of the quote
+    and another for the author of the quote.
+    The form should also have a file input field
+    for selecting an image file to use as the background of the meme.
+
+    Returns:
+        str: The HTML content to display on the web page. If there is
+        an error generating the meme, the error message
+        is displayed instead of the meme.
+    """
+
+    # 1. Use requests to save the image from the image_url form param to a
+    # temp local file.
     image_url = request.form['image_url']
     response = requests.get(image_url)
     img_file = tempfile.NamedTemporaryFile(delete=False)
     img_file.write(response.content)
     img_file.close()
 
-    # 2. Use the meme object to generate a meme using this temp file and the body and author form parameters.
+    # 2. Use the meme object to generate a meme using this temp file and the
+    # body and author form parameters.
     body = request.form['body']
     author = request.form['author']
     path = meme.make_meme(img_file.name, body, author)

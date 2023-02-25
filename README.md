@@ -55,7 +55,7 @@ Install the required dependencies by running "pip install -r requirements.txt".
 │   ├── _data
 │   ├── _tmp
 │   ├── app.py
-│   ├── fonts
+│   ├── fontsg
 │   ├── meme.py
 │   ├── static
 │   ├── templates

@@ -3,7 +3,8 @@ from .QuoteModel import QuoteModel
 from typing import List
 import docx
 
-class DocxIngestor (IngestorInterface): 
+
+class DocxIngestor (IngestorInterface):
     """Implementation of IngestorInterface for DOCX files."""
 
     allowed_extension = ['docx']
@@ -30,4 +31,3 @@ class DocxIngestor (IngestorInterface):
                 new_quote = QuoteModel(parse[0], parse[1].replace('\n', ''))
                 quotes.append(new_quote)
         return quotes
-

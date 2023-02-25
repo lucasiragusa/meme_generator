@@ -5,7 +5,8 @@ from .QuoteModel import QuoteModel
 
 class IngestorInterface(ABC):
     """
-    An abstract base class that defines an interface for ingesting different file formats and creating a list of QuoteModel objects.
+    An abstract base class that defines an interface for ingesting
+    different file formats and creating a list of QuoteModel objects.
 
     ...
 
@@ -15,7 +16,8 @@ class IngestorInterface(ABC):
         Checks if the given file path can be ingested by this ingestor.
 
     parse(cls, path:str) -> List[QuoteModel]:
-        Parses a file at the given path using this ingestor and returns a list of QuoteModel objects.
+        Parses a file at the given path using this ingestor and returns
+          a list of QuoteModel objects.
 
     """
 
@@ -43,7 +45,8 @@ class IngestorInterface(ABC):
     @abstractmethod
     def parse(cls, path: str) -> List[QuoteModel]:
         """
-        Parses a file at the given path using this ingestor and returns a list of QuoteModel objects.
+        Parses a file at the given path using this ingestor
+        and returns a list of QuoteModel objects.
 
         Parameters
         ----------
