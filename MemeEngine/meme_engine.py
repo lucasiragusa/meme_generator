@@ -1,6 +1,9 @@
 from PIL import Image, ImageDraw, ImageFont
+from flask import render_template
+from pathlib import Path
 import os
 import sys
+import random
 sys.path.append('.')
 
 
@@ -41,7 +44,8 @@ class MemeEngine:
         try:
             image = Image.open(img_path)
         except Exception as e:
-            raise Exception(f"Error loading image {img_path}: {e}")
+            return render_template('meme_error.html')
+            # raise Exception(f"Error loading image {img_path}: {e}")
 
         # Resize the image while maintaining the aspect ratio
         w, h = image.size
@@ -57,16 +61,22 @@ class MemeEngine:
         author = author.upper()
         text_width, text_height = draw.textsize(text, font)
         author_font = ImageFont.truetype('./fonts/LilitaOne-Regular.ttf',
-                                         size=10, encoding="unic")
+                                         size=15, encoding="unic")
         author_width, author_height = draw.textsize(author, author_font)
-        x = 20
-        y = height - text_height - author_height - 30
+
+        # Randomly position the text on the image
+        x = random.randint(0, width - text_width - author_width)
+        y = random.randint(0, height - text_height - author_height)
+
+        # Draw the text on the image
         draw.text((x, y), text, font=font, fill='white')
         draw.text((x, y + text_height + 10), '- ' + author,
                   font=author_font, fill='white')
 
-        # Save the new image to disk
-        output_path = os.path.join(self.output_dir, os.path.basename(img_path))
+        # # Save the new image to disk
+        output_path = os.path.join(self.output_dir,
+                                   os.path.basename(img_path))
+        print(f"Output path: {output_path}")
         image.save(output_path)
 
         return output_path

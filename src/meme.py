@@ -3,11 +3,11 @@ import os
 import random
 import sys
 import argparse
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from MemeEngine.meme_engine import MemeEngine
 from QuoteEngine.QuoteModel import QuoteModel
 from QuoteEngine.Ingestor import Ingestor
+
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
