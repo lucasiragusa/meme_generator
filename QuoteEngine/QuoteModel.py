@@ -7,10 +7,3 @@ class QuoteModel():
 
     def __repr__(self):
         return f'"{self.body}" - {self.author}'
-
-
-# Implement separate strategy objects that realize the IngestorInterface
-
-
-
-
